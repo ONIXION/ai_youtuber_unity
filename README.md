@@ -1,0 +1,2 @@
+# ai_youtuber_unity
+AI YoutuberのUnityプロジェクトを格納したもの．いろいろignoreしているので，恐らくそのままでは動かない．
