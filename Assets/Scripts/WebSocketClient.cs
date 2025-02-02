@@ -136,17 +136,21 @@ public class WebSocketClient : MonoBehaviour
                     if (messageObj != null && !string.IsNullOrEmpty(messageObj.content))
                     {
                         Debug.Log($"Message received: {messageObj.content}");
-                        if (messageObj.action == "Comment")
+                        if (messageObj.name == "comment") // Youtubeのコメント
                         {
                             GlobalVariables.CommentQueue.Add(messageObj);
                         }
-                        else if (messageObj.action == "Message")
+                        else if (messageObj.name == "message") // Booyomiで読み上げるメッセージ
                         {
                             GlobalVariables.MessageQueue.Add(messageObj);
                         }
-                        else
+                        else if (messageObj.name == "agent1") // agent1の発言
                         {
-                            GlobalVariables.AgentQueue.Add(messageObj);
+                            GlobalVariables.Agent1Queue.Add(messageObj);
+                        }
+                        else if (messageObj.name == "agent2") // agent2の発言
+                        {
+                            GlobalVariables.Agent2Queue.Add(messageObj);
                         }
                     }
                 }

@@ -12,7 +12,8 @@ public class ReceiveMessageFormat
 public static class GlobalVariables
 {
     // ReceiveMessageFormatの配列を保持する変数
-    public static List<ReceiveMessageFormat> AgentQueue = new List<ReceiveMessageFormat>();
+    public static List<ReceiveMessageFormat> Agent1Queue = new List<ReceiveMessageFormat>();
+    public static List<ReceiveMessageFormat> Agent2Queue = new List<ReceiveMessageFormat>();
     public static List<ReceiveMessageFormat> CommentQueue = new List<ReceiveMessageFormat>();
     public static List<ReceiveMessageFormat> MessageQueue = new List<ReceiveMessageFormat>();
     public static int BooyomiState = 0; // 棒読みちゃん 0:停止 1:音声合成中 2:音声出力中

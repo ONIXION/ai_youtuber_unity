@@ -1,7 +1,10 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class Anon : AivisSpeechCharacter
 {
+    protected override List<ReceiveMessageFormat> AgentQueue => GlobalVariables.Agent1Queue;
+
     protected override void ApplyEmotion(string emotion)
     {
         switch (emotion)

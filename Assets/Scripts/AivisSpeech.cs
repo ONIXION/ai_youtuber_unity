@@ -29,18 +29,18 @@ public class AivisSpeech : MonoBehaviour
     private void Start()
     {
         // デバッグ用にqueueにメッセージを追加
-        GlobalVariables.AgentQueue.Add(new ReceiveMessageFormat { content = "こんにちは", action = "", emotion = "happy" });
+        GlobalVariables.Agent1Queue.Add(new ReceiveMessageFormat { content = "こんにちは", action = "", emotion = "happy" });
         GlobalVariables.AivisState = 0;
     }
 
     private void Update()
     {
         // AgentQueueにメッセージがある場合
-        if (GlobalVariables.AgentQueue.Count > 0 && GlobalVariables.AivisState == 0 && GlobalVariables.BooyomiState == 0)
+        if (GlobalVariables.Agent1Queue.Count > 0 && GlobalVariables.AivisState == 0 && GlobalVariables.BooyomiState == 0)
         {
             // キューからメッセージを取り出す
-            var message = GlobalVariables.AgentQueue[0];
-            GlobalVariables.AgentQueue.RemoveAt(0);
+            var message = GlobalVariables.Agent1Queue[0];
+            GlobalVariables.Agent1Queue.RemoveAt(0);
             if (message.action == "Think"){
                 animator.SetBool("isThinking", true);
             }

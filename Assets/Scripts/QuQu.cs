@@ -1,7 +1,10 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class QuQu : AivisSpeechCharacter
 {
+    protected override List<ReceiveMessageFormat> AgentQueue => GlobalVariables.Agent2Queue;
+
     protected override void ApplyEmotion(string emotion)
     {
         switch (emotion)

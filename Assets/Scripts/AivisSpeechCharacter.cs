@@ -1,6 +1,7 @@
 using UnityEngine;
 using Cysharp.Threading.Tasks;
 using System;
+using System.Collections.Generic;
 
 public abstract class AivisSpeechCharacter : MonoBehaviour
 {
@@ -16,12 +17,14 @@ public abstract class AivisSpeechCharacter : MonoBehaviour
         }
     }
 
+    protected abstract List<ReceiveMessageFormat> AgentQueue { get; }
+
     protected virtual void Update()
     {
-        if (GlobalVariables.AgentQueue.Count > 0 && GlobalVariables.AivisState == 0 && GlobalVariables.BooyomiState == 0)
+        if (AgentQueue.Count > 0 && GlobalVariables.AivisState == 0 && GlobalVariables.BooyomiState == 0)
         {
-            var message = GlobalVariables.AgentQueue[0];
-            GlobalVariables.AgentQueue.RemoveAt(0);
+            var message = AgentQueue[0];
+            AgentQueue.RemoveAt(0);
             
             HandleAction(message.action);
             Text2VoiceAsync(message.content, message.emotion).Forget();
