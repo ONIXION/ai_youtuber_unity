@@ -1,4 +1,4 @@
-﻿﻿﻿﻿// https://github.com/TORISOUP/UnityBoyomichanClient
+﻿﻿// https://github.com/TORISOUP/UnityBoyomichanClient
 // USE: https://chi.usamimi.info/Program/Application/BouyomiChan/
 using System;
 using System.Threading;
