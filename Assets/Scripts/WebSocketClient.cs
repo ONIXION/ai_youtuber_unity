@@ -133,9 +133,9 @@ public class WebSocketClient : MonoBehaviour
                 try
                 {
                     var messageObj = JsonUtility.FromJson<ReceiveMessageFormat>(jsonMessage);
-                    if (messageObj != null && !string.IsNullOrEmpty(messageObj.reply))
+                    if (messageObj != null && !string.IsNullOrEmpty(messageObj.content))
                     {
-                        Debug.Log($"Message received: {messageObj.reply}");
+                        Debug.Log($"Message received: {messageObj.content}");
                         if (messageObj.action == "Comment")
                         {
                             GlobalVariables.CommentQueue.Add(messageObj);

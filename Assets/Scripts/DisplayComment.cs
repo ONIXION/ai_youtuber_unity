@@ -39,7 +39,7 @@ public class DisplayComment : MonoBehaviour
                 float delta = updateInterval / len;
                 var comment = GlobalVariables.CommentQueue[0];
                 // 新しいコメントを作成
-                string newComment = comment.emotion + " : " + comment.reply;
+                string newComment = comment.emotion + " : " + comment.content;
                 // 現在のテキストを保持
                 string currentText = commentText.text;
                 // 新しいコメントを一時的に追加して行数をチェック

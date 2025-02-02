@@ -43,11 +43,11 @@ public class BooyomiMessage : MonoBehaviour
             {
                 GlobalVariables.BooyomiState = 1; // 音声合成中
                 var message = GlobalVariables.MessageQueue[0];
-                if (!string.IsNullOrEmpty(message.reply))
+                if (!string.IsNullOrEmpty(message.content))
                 {
                     GlobalVariables.BooyomiState = 0;
                     await _boyomichanClient.TalkAsync(
-                        message.reply,
+                        message.content,
                         DEFAULT_SPEED,
                         DEFAULT_PITCH,
                         DEFAULT_VOLUME,
