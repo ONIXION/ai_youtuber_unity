@@ -29,14 +29,14 @@ public class AivisSpeech : MonoBehaviour
     private void Start()
     {
         // デバッグ用にqueueにメッセージを追加
-        GlobalVariables.AgentQueue.Add(new ReceiveMessageFormat { reply = "こんにちは", action = "", emotion = "happy" });
+        GlobalVariables.AgentQueue.Add(new ReceiveMessageFormat { content = "こんにちは", action = "", emotion = "happy" });
         GlobalVariables.AivisState = 0;
     }
 
     private void Update()
     {
         // AgentQueueにメッセージがある場合
-        if (GlobalVariables.AgentQueue.Count > 0 && GlobalVariables.AivisState == 0)
+        if (GlobalVariables.AgentQueue.Count > 0 && GlobalVariables.AivisState == 0 && GlobalVariables.BooyomiState == 0)
         {
             // キューからメッセージを取り出す
             var message = GlobalVariables.AgentQueue[0];
@@ -52,7 +52,7 @@ public class AivisSpeech : MonoBehaviour
                 animator.SetBool("isSearching", false);
             }
             // 音声合成を実行
-            Text2VoiceAsync(message.reply, message.emotion).Forget();
+            Text2VoiceAsync(message.content, message.emotion).Forget();
         }
     }
 
@@ -215,6 +215,7 @@ public class AivisSpeech : MonoBehaviour
         // 再生が完了するまで待機
         while (audioSource.isPlaying)
         {
+            // この中に入っているか確認が必要
             await UniTask.Yield();
         }
     }

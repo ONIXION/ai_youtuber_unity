@@ -2,9 +2,11 @@ using System.Collections.Generic;
 
 public class ReceiveMessageFormat
 {
-    public string reply;
-    public string action;
-    public string emotion;
+    public string name; // [comment, message, agent1, agent2]
+    public string action; // [Nothing, Think, WebSearch]
+    public string content; // hogehoge
+    public string emotion; // [normal, happy, angry, sad, surprised, shy, excited, smug, calm]
+    public string scene; // [””, “debate”, “conversation”]
 }
 
 public static class GlobalVariables

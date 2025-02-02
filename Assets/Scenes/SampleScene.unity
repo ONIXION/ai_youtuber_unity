@@ -172,7 +172,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9803922, g: 0.69411767, b: 0.43137258, a: 1}
+  m_Color: {r: 0.43137258, g: 0.69803923, b: 0.9803922, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -247,7 +247,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9803922, g: 0.69411767, b: 0.43137258, a: 1}
+  m_Color: {r: 0.4313726, g: 0.69942683, b: 0.98039216, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -881,7 +881,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: "\u3053\u3093\u306B\u3061\u306F"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 772b46bec45c6eb42853e40db30b28bb, type: 2}
   m_sharedMaterial: {fileID: -1903036428816329629, guid: 772b46bec45c6eb42853e40db30b28bb, type: 2}
@@ -908,8 +908,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 35
-  m_fontSizeBase: 35
+  m_fontSize: 40
+  m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
