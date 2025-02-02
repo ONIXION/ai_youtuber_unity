@@ -1,4 +1,4 @@
-﻿﻿// https://github.com/TORISOUP/UnityBoyomichanClient
+﻿﻿﻿﻿// https://github.com/TORISOUP/UnityBoyomichanClient
 // USE: https://chi.usamimi.info/Program/Application/BouyomiChan/
 using System;
 using System.Threading;
@@ -21,12 +21,24 @@ public class BooyomiMessage : MonoBehaviour
     [SerializeField]
     private VoiceType DEFAULT_VOICE_TYPE = VoiceType.Male1; // 棒読みちゃん画面上の設定を使用
 
+    [SerializeField]
+    private Telop telop;
+
     private void Start()
     {
         // デバッグ用にqueueにメッセージを追加
         // GlobalVariables.MessageQueue.Add(new ReceiveMessageFormat { reply = "こんにちは", action = "", emotion = "" });
         GlobalVariables.BooyomiState = 0;
         _cancellationTokenSource = new CancellationTokenSource();
+
+        if (telop == null)
+        {
+            telop = FindObjectOfType<Telop>();
+            if (telop == null)
+            {
+                Debug.LogError("Telop component not found in the scene!");
+            }
+        }
         // TCP接続を確立
         _boyomichanClient = new TcpBoyomichanClient(DEFAULT_HOST, DEFAULT_PORT);
         // メッセージキューの監視を開始
@@ -46,6 +58,13 @@ public class BooyomiMessage : MonoBehaviour
                 if (!string.IsNullOrEmpty(message.content))
                 {
                     GlobalVariables.BooyomiState = 0;
+                    
+                    // Display telop before speech
+                    if (telop != null)
+                    {
+                        telop.Display(message.content, Color.black).Forget();
+                    }
+                    
                     await _boyomichanClient.TalkAsync(
                         message.content,
                         DEFAULT_SPEED,

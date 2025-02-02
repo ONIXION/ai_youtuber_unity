@@ -70,4 +70,9 @@ public class Anon : AivisSpeechCharacter
         faceMR.SetBlendShapeWeight((int)Morph.zitome, 0f);
         faceMR.SetBlendShapeWeight((int)Morph.nagomi, 0f);
     }
+
+    protected override Color GetTelopColor()
+    {
+        return new Color(0.5f, 0f, 0.5f); // Purple color (RGB: 128, 0, 128)
+    }
 }

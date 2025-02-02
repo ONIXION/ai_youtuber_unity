@@ -70,4 +70,9 @@ public class QuQu : AivisSpeechCharacter
         faceMR.SetBlendShapeWeight((int)Morph.zitome, 0f);
         faceMR.SetBlendShapeWeight((int)Morph.nagomi, 0f);
     }
+
+    protected override Color GetTelopColor()
+    {
+        return Color.green;
+    }
 }

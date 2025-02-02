@@ -8,12 +8,22 @@ public abstract class AivisSpeechCharacter : MonoBehaviour
     [SerializeField] protected AudioSource audioSource;
     [SerializeField] protected SkinnedMeshRenderer faceMR;
     [SerializeField] protected Animator animator;
+    [SerializeField] protected Telop telop;
 
     protected virtual void Start()
     {
         if (audioSource == null)
         {
             audioSource = gameObject.AddComponent<AudioSource>();
+        }
+
+        if (telop == null)
+        {
+            telop = FindObjectOfType<Telop>();
+            if (telop == null)
+            {
+                Debug.LogError("Telop component not found in the scene!");
+            }
         }
     }
 
@@ -68,6 +78,14 @@ public abstract class AivisSpeechCharacter : MonoBehaviour
             var audioClip = AivisSpeechClient.CreateAudioClipFromWAV(audioData);
             if (audioClip == null) return;
 
+            // Display telop before playing audio
+            if (telop != null)
+            {
+                // Get the appropriate color based on the character type
+                Color textColor = GetTelopColor();
+                telop.Display(text, textColor).Forget();
+            }
+
             audioSource.clip = audioClip;
             audioSource.Play();
 
@@ -86,5 +104,12 @@ public abstract class AivisSpeechCharacter : MonoBehaviour
             animator.SetTrigger("FinishTalk");
             GlobalVariables.AivisState = 0;
         }
+    }
+
+    protected virtual Color GetTelopColor()
+    {
+        // Default implementation returns black
+        // Override in QuQu and Anon to return their specific colors
+        return Color.black;
     }
 }
