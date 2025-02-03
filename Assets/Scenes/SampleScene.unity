@@ -847,6 +847,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   faceMR: {fileID: 1903570572}
+  isAnon: 0
   blinkSpanMin: 5
   blinkSpanMax: 10.5
 --- !u!114 &825839155
@@ -870,6 +871,8 @@ MonoBehaviour:
   tempoDynamicsScale: 1
   pitchScale: 0
   volumeScale: 1
+  characterInterval: 0.1
+  displayDuration: 2
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -1188,6 +1191,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: Anon
       objectReference: {fileID: 0}
+    - target: {fileID: 7404774248894272768, guid: 8ae2a6881bbfcd84697b56e80d826039, type: 3}
+      propertyPath: m_BlendShapeWeights.Array.size
+      value: 176
+      objectReference: {fileID: 0}
+    - target: {fileID: 7404774248894272768, guid: 8ae2a6881bbfcd84697b56e80d826039, type: 3}
+      propertyPath: m_BlendShapeWeights.Array.data[0]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7404774248894272768, guid: 8ae2a6881bbfcd84697b56e80d826039, type: 3}
+      propertyPath: m_BlendShapeWeights.Array.data[20]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7404774248894272768, guid: 8ae2a6881bbfcd84697b56e80d826039, type: 3}
+      propertyPath: m_BlendShapeWeights.Array.data[21]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7404774248894272768, guid: 8ae2a6881bbfcd84697b56e80d826039, type: 3}
+      propertyPath: m_BlendShapeWeights.Array.data[25]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7404774248894272768, guid: 8ae2a6881bbfcd84697b56e80d826039, type: 3}
+      propertyPath: m_BlendShapeWeights.Array.data[27]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7404774248894272768, guid: 8ae2a6881bbfcd84697b56e80d826039, type: 3}
+      propertyPath: m_BlendShapeWeights.Array.data[31]
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6289954572508731932, guid: 8ae2a6881bbfcd84697b56e80d826039, type: 3}
     - {fileID: 8031613357089914483, guid: 8ae2a6881bbfcd84697b56e80d826039, type: 3}
@@ -1261,6 +1292,8 @@ MonoBehaviour:
   tempoDynamicsScale: 1
   pitchScale: 0
   volumeScale: 1
+  characterInterval: 0.1
+  displayDuration: 2
 --- !u!114 &1385230952
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1274,6 +1307,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   faceMR: {fileID: 0}
+  isAnon: 0
   blinkSpanMin: 5
   blinkSpanMax: 10.5
 --- !u!114 &1385230953
@@ -1289,26 +1323,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   updateMethod: 0
-  skinnedMeshRenderer: {fileID: 0}
+  skinnedMeshRenderer: {fileID: 1385230949}
   blendShapes:
   - phoneme: A
-    index: -1
-    maxWeight: 1
+    index: 20
+    maxWeight: 0.5
   - phoneme: I
-    index: -1
-    maxWeight: 1
+    index: 21
+    maxWeight: 0.5
   - phoneme: U
-    index: -1
-    maxWeight: 1
+    index: 22
+    maxWeight: 0.5
   - phoneme: E
-    index: -1
-    maxWeight: 1
+    index: 23
+    maxWeight: 0.5
   - phoneme: O
-    index: -1
-    maxWeight: 1
+    index: 24
+    maxWeight: 0.5
   - phoneme: N
-    index: -1
-    maxWeight: 1
+    index: 27
+    maxWeight: 0.5
   - phoneme: '-'
     index: -1
     maxWeight: 1

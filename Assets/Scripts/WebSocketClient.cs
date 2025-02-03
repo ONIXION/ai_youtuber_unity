@@ -17,7 +17,7 @@ public class WebSocketClient : MonoBehaviour
     private bool isConnecting = false;
     private bool isConnected = false;
     private bool isQuitting = false;
-    private int old_aivis_state = 0;
+    private bool Queue_is_empty = false;
 
     async void Start()
     {
@@ -30,12 +30,15 @@ public class WebSocketClient : MonoBehaviour
 
     async void Update()
     {
-        if (GlobalVariables.AivisState == 2 && old_aivis_state == 1)
+        int count = GlobalVariables.MessageQueue.Count + GlobalVariables.Agent1Queue.Count + GlobalVariables.Agent2Queue.Count;
+        // Queueが空になったらFinishを送信
+        if (count == 0 && !Queue_is_empty)
         {
-            old_aivis_state = GlobalVariables.AivisState;
+            Queue_is_empty = true;
             await SendText("Finish");
-        }else{
-            old_aivis_state = GlobalVariables.AivisState;
+        }else if (count > 0)
+        {
+            Queue_is_empty = false;
         }
     }
 
