@@ -865,6 +865,11 @@ MonoBehaviour:
   faceMR: {fileID: 1903570572}
   animator: {fileID: 825839148}
   telop: {fileID: 316653983}
+  speedScale: 1
+  intonationScale: 1
+  tempoDynamicsScale: 1
+  pitchScale: 0
+  volumeScale: 1
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -1251,6 +1256,11 @@ MonoBehaviour:
   faceMR: {fileID: 1385230949}
   animator: {fileID: 1385230950}
   telop: {fileID: 316653983}
+  speedScale: 1
+  intonationScale: 1
+  tempoDynamicsScale: 1
+  pitchScale: 0
+  volumeScale: 1
 --- !u!114 &1385230952
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1280,7 +1290,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   updateMethod: 0
   skinnedMeshRenderer: {fileID: 0}
-  blendShapes: []
+  blendShapes:
+  - phoneme: A
+    index: -1
+    maxWeight: 1
+  - phoneme: I
+    index: -1
+    maxWeight: 1
+  - phoneme: U
+    index: -1
+    maxWeight: 1
+  - phoneme: E
+    index: -1
+    maxWeight: 1
+  - phoneme: O
+    index: -1
+    maxWeight: 1
+  - phoneme: N
+    index: -1
+    maxWeight: 1
+  - phoneme: '-'
+    index: -1
+    maxWeight: 1
   maxBlendShapeValue: 100
   minVolume: -2.5
   maxVolume: -1.5
@@ -1298,10 +1329,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87560e04aa74c7a41acb9c87051c3b02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  profile: {fileID: 0}
+  profile: {fileID: 11400000, guid: 04d8d7db6114a384aaabeb1d02dd2013, type: 2}
   onLipSyncUpdate:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1385230953}
+        m_TargetAssemblyTypeName: uLipSync.uLipSyncBlendShape, uLipSync.Runtime
+        m_MethodName: OnLipSyncUpdate
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   outputSoundGain: 1
   audioSourceProxy: {fileID: 0}
 --- !u!82 &1385230955

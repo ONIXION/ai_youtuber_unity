@@ -6,6 +6,7 @@ public class AutoBlink : MonoBehaviour
 {
     [SerializeField]
     private SkinnedMeshRenderer faceMR;
+    [SerializeField] private bool isAnon; // キャラクターがAnonの場合はtrue, QuQuの場合はfalse
     [SerializeField]
     private float blinkSpanMin = 5.0f;
     [SerializeField]
@@ -33,12 +34,25 @@ public class AutoBlink : MonoBehaviour
     }
     IEnumerator Blink()
     {
-        faceMR.SetBlendShapeWeight((int)Morph.mabataki, 80);
-        yield return new WaitForSeconds(0.01f);
-        faceMR.SetBlendShapeWeight((int)Morph.mabataki, 100);
-        yield return new WaitForSeconds(0.04f);
-        faceMR.SetBlendShapeWeight((int)Morph.mabataki, 60);
-        yield return new WaitForSeconds(0.015f);
-        faceMR.SetBlendShapeWeight((int)Morph.mabataki, 0);
+        if (isAnon)
+        {
+            faceMR.SetBlendShapeWeight((int)AnonMorph.mabataki, 80);
+            yield return new WaitForSeconds(0.01f);
+            faceMR.SetBlendShapeWeight((int)AnonMorph.mabataki, 100);
+            yield return new WaitForSeconds(0.04f);
+            faceMR.SetBlendShapeWeight((int)AnonMorph.mabataki, 60);
+            yield return new WaitForSeconds(0.015f);
+            faceMR.SetBlendShapeWeight((int)AnonMorph.mabataki, 0);
+        }
+        else
+        {
+            faceMR.SetBlendShapeWeight((int)QuQuMorph.mabataki, 80);
+            yield return new WaitForSeconds(0.01f);
+            faceMR.SetBlendShapeWeight((int)QuQuMorph.mabataki, 100);
+            yield return new WaitForSeconds(0.04f);
+            faceMR.SetBlendShapeWeight((int)QuQuMorph.mabataki, 60);
+            yield return new WaitForSeconds(0.015f);
+            faceMR.SetBlendShapeWeight((int)QuQuMorph.mabataki, 0);
+        }
     }
 }

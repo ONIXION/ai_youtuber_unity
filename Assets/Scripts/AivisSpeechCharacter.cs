@@ -9,6 +9,34 @@ public abstract class AivisSpeechCharacter : MonoBehaviour
     [SerializeField] protected SkinnedMeshRenderer faceMR;
     [SerializeField] protected Animator animator;
     [SerializeField] protected Telop telop;
+    /// <summary>
+    /// 話速 0.5~2.0
+    /// </summary>
+    [SerializeField] protected float speedScale = 1.0f;
+    /// <summary>
+    /// スタイルの強さ 0.0~2.0
+    /// </summary>
+    [SerializeField] protected float intonationScale = 1.0f;
+    /// <summary>
+    /// 緩急の強さ 0.0~2.0
+    /// </summary>
+    [SerializeField] protected float tempoDynamicsScale = 1.0f;
+    /// <summary>
+    /// 声の高さ -0.15~0.15
+    /// </summary>
+    [SerializeField] protected float pitchScale = 0.0f;
+    /// <summary>
+    /// 音量 0.0~2.0
+    /// </summary>
+    [SerializeField] protected float volumeScale = 1.0f;
+    /// <summary>
+    /// テロップの文字ごとの表示間隔
+    /// </summary>
+    [SerializeField] protected float characterInterval = 0.1f;
+    /// <summary>
+    /// テロップの全ての文字を表示した後に表示を維持する時間
+    /// </summary>
+    [SerializeField] protected float displayDuration = 2f;
 
     protected virtual void Start()
     {
@@ -31,20 +59,21 @@ public abstract class AivisSpeechCharacter : MonoBehaviour
 
     protected virtual void Update()
     {
+        // AgentNQueueにメッセージがある場合 かつ AivisStateが停止中 かつ BooyomiStateが停止中
         if (AgentQueue.Count > 0 && GlobalVariables.AivisState == 0 && GlobalVariables.BooyomiState == 0)
         {
+            GlobalVariables.AivisState = 1; // 音声合成中
             var message = AgentQueue[0];
             AgentQueue.RemoveAt(0);
-            
             HandleAction(message.action);
             Text2VoiceAsync(
-                message.content, 
+                message.content,
                 message.emotion,
-                1.0f,  // speedScale
-                1.0f,  // intonationScale
-                1.0f,  // tempoDynamicsScale
-                0.0f,  // pitchScale
-                1.0f   // volumeScale
+                speedScale,
+                intonationScale,
+                tempoDynamicsScale,
+                pitchScale,
+                volumeScale
             ).Forget();
         }
     }
@@ -70,7 +99,7 @@ public abstract class AivisSpeechCharacter : MonoBehaviour
     protected abstract void ResetEmotion();
 
     protected virtual async UniTask Text2VoiceAsync(
-        string text, 
+        string text,
         string emotion,
         float speedScale = 1.0f,
         float intonationScale = 1.0f,
@@ -83,14 +112,14 @@ public abstract class AivisSpeechCharacter : MonoBehaviour
             ApplyEmotion(emotion);
 
             var audioData = await AivisSpeechClient.Instance.Text2VoiceAsync(
-                text, 
+                text,
                 emotion,
                 speedScale,
                 intonationScale,
                 tempoDynamicsScale,
                 pitchScale,
                 volumeScale);
-                
+
             if (audioData == null) return;
 
             if (emotion == "surprised")
@@ -106,10 +135,12 @@ public abstract class AivisSpeechCharacter : MonoBehaviour
             {
                 // Get the appropriate color based on the character type
                 Color textColor = GetTelopColor();
-                telop.Display(text, textColor).Forget();
+                telop.Display(text, textColor, characterInterval, displayDuration).Forget();
             }
 
             audioSource.clip = audioClip;
+            Debug.Log($"Playing Aivis audio: {text}");
+            GlobalVariables.AivisState = 2; // 音声出力中
             audioSource.Play();
 
             while (audioSource.isPlaying)
@@ -123,8 +154,9 @@ public abstract class AivisSpeechCharacter : MonoBehaviour
         }
         finally
         {
+            Debug.Log("Aivis speech finished");
             ResetEmotion();
-            animator.SetTrigger("FinishTalk");
+            animator.SetTrigger("FinishTalk"); // ここのアニメーション遷移をキャラごとに分ける
             GlobalVariables.AivisState = 0;
         }
     }

@@ -83,13 +83,12 @@ public class AivisSpeechClient
     }
 
     public async UniTask<byte[]> Text2VoiceAsync(string text, string emotion, 
-        float speedScale = 1.0f, 
-        float intonationScale = 1.0f, 
-        float tempoDynamicsScale = 1.0f, 
-        float pitchScale = 0.0f, 
+        float speedScale = 1.0f,
+        float intonationScale = 1.0f,
+        float tempoDynamicsScale = 1.0f,
+        float pitchScale = 0.0f,
         float volumeScale = 1.0f)
     {
-        GlobalVariables.AivisState = 1; // 音声合成中
         int speaker = GetSpeakerIdForEmotion(emotion);
 
         try
@@ -102,12 +101,10 @@ public class AivisSpeechClient
             if (queryRequest.result != UnityWebRequest.Result.Success)
             {
                 Debug.LogError($"Audio query failed: {queryRequest.error}");
-                GlobalVariables.AivisState = 0;
                 return null;
             }
 
             var queryResponse = queryRequest.downloadHandler.text;
-            
             // Add voice control parameters to the query response
             // Parse and modify the JSON response
             var originalJson = JsonUtility.FromJson<AudioQueryResponse>(queryResponse);
@@ -134,13 +131,6 @@ public class AivisSpeechClient
                 return null;
             }
 
-            // GlobalVariables.BooyomiState == 0になるまで待機
-            while (GlobalVariables.BooyomiState != 0)
-            {
-                await UniTask.Yield();
-            }
-
-            GlobalVariables.AivisState = 2; // 音声出力中
             return synthesisRequest.downloadHandler.data;
         }
         catch (Exception e)
@@ -157,7 +147,7 @@ public class AivisSpeechClient
         // WAVヘッダーをスキップ (44バイト)
         const int headerSize = 44;
         // AudioClipを作成
-        var audioClip = AudioClip.Create("voice", 
+        var audioClip = AudioClip.Create("voice",
             (wavData.Length - headerSize) / 2, // 16bitなので2で割る
             1, // モノラル
             44100, // サンプリングレート

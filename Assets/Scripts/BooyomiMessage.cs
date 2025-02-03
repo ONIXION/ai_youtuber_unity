@@ -1,4 +1,4 @@
-﻿﻿﻿﻿// https://github.com/TORISOUP/UnityBoyomichanClient
+﻿﻿// https://github.com/TORISOUP/UnityBoyomichanClient
 // USE: https://chi.usamimi.info/Program/Application/BouyomiChan/
 using System;
 using System.Threading;
@@ -41,65 +41,67 @@ public class BooyomiMessage : MonoBehaviour
         _boyomichanClient = new TcpBoyomichanClient(DEFAULT_HOST, DEFAULT_PORT);
         // メッセージキューの監視を開始
         CheckMessageQueue(_cancellationTokenSource.Token).Forget();
-        // タスク数の監視を開始
-        CheckTaskCount(_cancellationTokenSource.Token).Forget();
     }
 
     private async UniTask CheckMessageQueue(CancellationToken token)
     {
         while (!token.IsCancellationRequested)
         {
-            if (_boyomichanClient != null && GlobalVariables.MessageQueue.Count > 0 && GlobalVariables.AivisState != 2)
-            {
-                GlobalVariables.BooyomiState = 1; // 音声合成中
-                var message = GlobalVariables.MessageQueue[0];
-                if (!string.IsNullOrEmpty(message.content))
-                {
-                    GlobalVariables.BooyomiState = 0;
-                    
-                    // Display telop before speech
-                    if (telop != null)
-                    {
-                        telop.Display(message.content, Color.black).Forget();
-                    }
-                    
-                    await _boyomichanClient.TalkAsync(
-                        message.content,
-                        DEFAULT_SPEED,
-                        DEFAULT_PITCH,
-                        DEFAULT_VOLUME,
-                        DEFAULT_VOICE_TYPE,
-                        token
-                    );
-                }
-                // メッセージを送信したら削除
-                GlobalVariables.MessageQueue.RemoveAt(0);
-            }
-
-            await UniTask.Delay(TimeSpan.FromMilliseconds(100), cancellationToken: token);
-        }
-    }
-
-    private async UniTask CheckTaskCount(CancellationToken token)
-    {
-        while (!token.IsCancellationRequested)
-        {
             if (_boyomichanClient != null)
             {
-                // 残りのタスク数取得
-                var count = await _boyomichanClient.GetTaskCountAsync(token);
-                if (GlobalVariables.BooyomiState == 1 && count > 0)
+                // メッセージキューにメッセージがある場合 かつ Aivisが停止中の場合 かつ Booyomiが停止中の場合
+                if (GlobalVariables.MessageQueue.Count > 0 && GlobalVariables.AivisState == 0 && GlobalVariables.BooyomiState == 0)
                 {
-                    GlobalVariables.BooyomiState = 2; // 音声出力中
+                    var message = GlobalVariables.MessageQueue[0];
+                    GlobalVariables.MessageQueue.RemoveAt(0);
+                    if (!string.IsNullOrEmpty(message.content))
+                    {
+                        GlobalVariables.BooyomiState = 1; // 音声合成中
+                        // Display telop before speech
+                        if (telop != null)
+                        {
+                            telop.Display(message.content, Color.black).Forget();
+                        }
+                        try
+                        {
+                            await _boyomichanClient.TalkAsync(
+                                message.content,
+                                DEFAULT_SPEED,
+                                DEFAULT_PITCH,
+                                DEFAULT_VOLUME,
+                                DEFAULT_VOICE_TYPE,
+                                token
+                            );
+                            bool isPlaying = false;
+                            while (!token.IsCancellationRequested)
+                            {
+                                isPlaying = await _boyomichanClient.CheckNowPlayingAsync(token);
+                                if (isPlaying)
+                                {
+                                    GlobalVariables.BooyomiState = 2; // 音声出力中に更新
+                                    break;
+                                }
+                                await UniTask.Delay(TimeSpan.FromMilliseconds(50), cancellationToken: token);
+                            }
+                            while (!token.IsCancellationRequested)
+                            {
+                                isPlaying = await _boyomichanClient.CheckNowPlayingAsync(token);
+                                if (!isPlaying)
+                                {
+                                    GlobalVariables.BooyomiState = 0; // 音声出力終了に更新
+                                    break;
+                                }
+                                await UniTask.Delay(TimeSpan.FromMilliseconds(50), cancellationToken: token);
+                            }
+                        }
+                        catch (Exception e)
+                        {
+                            Debug.LogError($"音声合成/再生中にエラーが発生しました: {e.Message}");
+                            GlobalVariables.BooyomiState = 0; // エラー時は停止状態に
+                        }
+                    }
                 }
-                if (GlobalVariables.BooyomiState == 2 && count == 0)
-                {
-                    GlobalVariables.BooyomiState = 0; // 停止
-                    Debug.Log("読み上げタスクが完了しました");
-                }
-                // Debug.Log(GlobalVariables.BooyomiState);
             }
-
             await UniTask.Delay(TimeSpan.FromMilliseconds(100), cancellationToken: token);
         }
     }

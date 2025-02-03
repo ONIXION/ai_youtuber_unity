@@ -90,42 +90,42 @@ public class AivisSpeech : MonoBehaviour
                 break;
             case "happy": // Normal
                 animator.SetInteger("EmotionIdx", (int)Emotion.happy);
-                faceMR.SetBlendShapeWeight((int)Morph.warai, 100f);
-                faceMR.SetBlendShapeWeight((int)Morph.nikori, 100f);
+                faceMR.SetBlendShapeWeight((int)QuQuMorph.warai, 100f);
+                faceMR.SetBlendShapeWeight((int)QuQuMorph.nikori, 100f);
                 break;
             case "angry": // ArmsCrossedPauting
                 animator.SetInteger("EmotionIdx", (int)Emotion.angry);
-                faceMR.SetBlendShapeWeight((int)Morph.okori, 100f);
-                faceMR.SetBlendShapeWeight((int)Morph.niramu, 100f);
-                faceMR.SetBlendShapeWeight((int)Morph.high_light_off, 100f);
+                faceMR.SetBlendShapeWeight((int)QuQuMorph.okori, 100f);
+                faceMR.SetBlendShapeWeight((int)QuQuMorph.niramu, 100f);
+                faceMR.SetBlendShapeWeight((int)QuQuMorph.high_light_off, 100f);
                 break;
             case "sad": // shy
                 animator.SetInteger("EmotionIdx", (int)Emotion.sad);
-                faceMR.SetBlendShapeWeight((int)Morph.komaru, 100f);
-                faceMR.SetBlendShapeWeight((int)Morph.mayu_sita, 60f);
+                faceMR.SetBlendShapeWeight((int)QuQuMorph.komaru, 100f);
+                faceMR.SetBlendShapeWeight((int)QuQuMorph.mayu_sita, 60f);
                 break;
             case "surprised": // surprised
                 animator.SetInteger("EmotionIdx", (int)Emotion.surprised);
-                faceMR.SetBlendShapeWeight((int)Morph.bikkuri, 50f);
-                faceMR.SetBlendShapeWeight((int)Morph.hitomi_small, 40f);
+                faceMR.SetBlendShapeWeight((int)QuQuMorph.bikkuri, 50f);
+                faceMR.SetBlendShapeWeight((int)QuQuMorph.hitomi_small, 40f);
                 break;
             case "shy": // shy
                 animator.SetInteger("EmotionIdx", (int)Emotion.shy);
-                faceMR.SetBlendShapeWeight((int)Morph.hohozome, 100f);
-                faceMR.SetBlendShapeWeight((int)Morph.komaru, 70f);
+                faceMR.SetBlendShapeWeight((int)QuQuMorph.hohozome, 100f);
+                faceMR.SetBlendShapeWeight((int)QuQuMorph.komaru, 70f);
                 break;
             case "excited": // excited
                 animator.SetInteger("EmotionIdx", (int)Emotion.excited);
-                faceMR.SetBlendShapeWeight((int)Morph.star, 100f);
+                faceMR.SetBlendShapeWeight((int)QuQuMorph.star, 100f);
                 break;
             case "smug": // ArmsCrossedCalm
                 animator.SetInteger("EmotionIdx", (int)Emotion.smug);
-                faceMR.SetBlendShapeWeight((int)Morph.okori, 50f);
-                faceMR.SetBlendShapeWeight((int)Morph.zitome, 80f);
+                faceMR.SetBlendShapeWeight((int)QuQuMorph.okori, 50f);
+                faceMR.SetBlendShapeWeight((int)QuQuMorph.zitome, 80f);
                 break;
             case "calm": // Calm
                 animator.SetInteger("EmotionIdx", (int)Emotion.calm);
-                faceMR.SetBlendShapeWeight((int)Morph.nagomi, 15f);
+                faceMR.SetBlendShapeWeight((int)QuQuMorph.nagomi, 15f);
                 break;
         }
 
@@ -181,19 +181,19 @@ public class AivisSpeech : MonoBehaviour
         finally
         {
             // モーフを元に戻す
-            faceMR.SetBlendShapeWeight((int)Morph.warai, 0f);
-            faceMR.SetBlendShapeWeight((int)Morph.nikori, 0f);
-            faceMR.SetBlendShapeWeight((int)Morph.okori, 0f);
-            faceMR.SetBlendShapeWeight((int)Morph.niramu, 0f);
-            faceMR.SetBlendShapeWeight((int)Morph.high_light_off, 0f);
-            faceMR.SetBlendShapeWeight((int)Morph.komaru, 0f);
-            faceMR.SetBlendShapeWeight((int)Morph.mayu_sita, 0f);
-            faceMR.SetBlendShapeWeight((int)Morph.bikkuri, 0f);
-            faceMR.SetBlendShapeWeight((int)Morph.hitomi_small, 0f);
-            faceMR.SetBlendShapeWeight((int)Morph.hohozome, 0f);
-            faceMR.SetBlendShapeWeight((int)Morph.star, 0f);
-            faceMR.SetBlendShapeWeight((int)Morph.zitome, 0f);
-            faceMR.SetBlendShapeWeight((int)Morph.nagomi, 0f);
+            faceMR.SetBlendShapeWeight((int)QuQuMorph.warai, 0f);
+            faceMR.SetBlendShapeWeight((int)QuQuMorph.nikori, 0f);
+            faceMR.SetBlendShapeWeight((int)QuQuMorph.okori, 0f);
+            faceMR.SetBlendShapeWeight((int)QuQuMorph.niramu, 0f);
+            faceMR.SetBlendShapeWeight((int)QuQuMorph.high_light_off, 0f);
+            faceMR.SetBlendShapeWeight((int)QuQuMorph.komaru, 0f);
+            faceMR.SetBlendShapeWeight((int)QuQuMorph.mayu_sita, 0f);
+            faceMR.SetBlendShapeWeight((int)QuQuMorph.bikkuri, 0f);
+            faceMR.SetBlendShapeWeight((int)QuQuMorph.hitomi_small, 0f);
+            faceMR.SetBlendShapeWeight((int)QuQuMorph.hohozome, 0f);
+            faceMR.SetBlendShapeWeight((int)QuQuMorph.star, 0f);
+            faceMR.SetBlendShapeWeight((int)QuQuMorph.zitome, 0f);
+            faceMR.SetBlendShapeWeight((int)QuQuMorph.nagomi, 0f);
             animator.SetTrigger("FinishTalk");
             GlobalVariables.AivisState = 0;
         }
