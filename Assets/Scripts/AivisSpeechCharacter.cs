@@ -37,7 +37,15 @@ public abstract class AivisSpeechCharacter : MonoBehaviour
             AgentQueue.RemoveAt(0);
             
             HandleAction(message.action);
-            Text2VoiceAsync(message.content, message.emotion).Forget();
+            Text2VoiceAsync(
+                message.content, 
+                message.emotion,
+                1.0f,  // speedScale
+                1.0f,  // intonationScale
+                1.0f,  // tempoDynamicsScale
+                0.0f,  // pitchScale
+                1.0f   // volumeScale
+            ).Forget();
         }
     }
 
@@ -61,13 +69,28 @@ public abstract class AivisSpeechCharacter : MonoBehaviour
     protected abstract void ApplyEmotion(string emotion);
     protected abstract void ResetEmotion();
 
-    protected virtual async UniTask Text2VoiceAsync(string text, string emotion)
+    protected virtual async UniTask Text2VoiceAsync(
+        string text, 
+        string emotion,
+        float speedScale = 1.0f,
+        float intonationScale = 1.0f,
+        float tempoDynamicsScale = 1.0f,
+        float pitchScale = 0.0f,
+        float volumeScale = 1.0f)
     {
         try
         {
             ApplyEmotion(emotion);
 
-            var audioData = await AivisSpeechClient.Instance.Text2VoiceAsync(text, emotion);
+            var audioData = await AivisSpeechClient.Instance.Text2VoiceAsync(
+                text, 
+                emotion,
+                speedScale,
+                intonationScale,
+                tempoDynamicsScale,
+                pitchScale,
+                volumeScale);
+                
             if (audioData == null) return;
 
             if (emotion == "surprised")

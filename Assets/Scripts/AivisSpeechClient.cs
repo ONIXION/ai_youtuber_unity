@@ -3,6 +3,45 @@ using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
 using Cysharp.Threading.Tasks;
+using System.Collections.Generic;
+
+[System.Serializable]
+public class Mora
+{
+    public string text;
+    public string consonant;
+    public float consonant_length;
+    public string vowel;
+    public float vowel_length;
+    public float pitch;
+}
+
+[System.Serializable]
+public class AccentPhrase
+{
+    public List<Mora> moras;
+    public int accent;
+    public Mora pause_mora;
+    public bool is_interrogative;
+}
+
+[System.Serializable]
+public class AudioQueryResponse
+{
+    public List<AccentPhrase> accent_phrases;
+    public float speedScale;
+    public float intonationScale;
+    public float tempoDynamicsScale;
+    public float pitchScale;
+    public float volumeScale;
+    public float prePhonemeLength;
+    public float postPhonemeLength;
+    public float pauseLength;
+    public float pauseLengthScale;
+    public int outputSamplingRate;
+    public bool outputStereo;
+    public string kana;
+}
 
 public class AivisSpeechClient
 {
@@ -43,7 +82,12 @@ public class AivisSpeechClient
         };
     }
 
-    public async UniTask<byte[]> Text2VoiceAsync(string text, string emotion)
+    public async UniTask<byte[]> Text2VoiceAsync(string text, string emotion, 
+        float speedScale = 1.0f, 
+        float intonationScale = 1.0f, 
+        float tempoDynamicsScale = 1.0f, 
+        float pitchScale = 0.0f, 
+        float volumeScale = 1.0f)
     {
         GlobalVariables.AivisState = 1; // 音声合成中
         int speaker = GetSpeakerIdForEmotion(emotion);
@@ -63,11 +107,21 @@ public class AivisSpeechClient
             }
 
             var queryResponse = queryRequest.downloadHandler.text;
+            
+            // Add voice control parameters to the query response
+            // Parse and modify the JSON response
+            var originalJson = JsonUtility.FromJson<AudioQueryResponse>(queryResponse);
+            originalJson.speedScale = speedScale;
+            originalJson.intonationScale = intonationScale;
+            originalJson.tempoDynamicsScale = tempoDynamicsScale;
+            originalJson.pitchScale = pitchScale;
+            originalJson.volumeScale = volumeScale;
+            var modifiedQueryResponse = JsonUtility.ToJson(originalJson);
 
             // synthesisリクエスト
             var synthesisUrl = $"http://{HOST}:{PORT}/synthesis?speaker={speaker}";
             var synthesisRequest = new UnityWebRequest(synthesisUrl, "POST");
-            synthesisRequest.uploadHandler = new UploadHandlerRaw(Encoding.UTF8.GetBytes(queryResponse));
+            synthesisRequest.uploadHandler = new UploadHandlerRaw(Encoding.UTF8.GetBytes(modifiedQueryResponse));
             synthesisRequest.downloadHandler = new DownloadHandlerBuffer();
             synthesisRequest.SetRequestHeader("Content-Type", "application/json");
             synthesisRequest.SetRequestHeader("accept", "audio/wav");
@@ -102,7 +156,6 @@ public class AivisSpeechClient
 
         // WAVヘッダーをスキップ (44バイト)
         const int headerSize = 44;
-        
         // AudioClipを作成
         var audioClip = AudioClip.Create("voice", 
             (wavData.Length - headerSize) / 2, // 16bitなので2で割る

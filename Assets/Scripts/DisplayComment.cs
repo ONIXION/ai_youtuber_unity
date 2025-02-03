@@ -13,19 +13,6 @@ public class DisplayComment : MonoBehaviour
     private int maxLines = 21;
 
     private void Start(){
-        // デバッグのためにqueueにメッセージを追加
-        // GlobalVariables.CommentQueue.Add(new ReceiveMessageFormat { reply = "こんにちは吾輩は猫である．名前はまだない．", action = "", emotion = "happy" });
-        // GlobalVariables.CommentQueue.Add(new ReceiveMessageFormat { reply = "こんにちは吾輩は猫である．名前はまだない．", action = "", emotion = "happy" });
-        // GlobalVariables.CommentQueue.Add(new ReceiveMessageFormat { reply = "こんにちは吾輩は猫である．名前はまだない．", action = "", emotion = "happy" });
-        // GlobalVariables.CommentQueue.Add(new ReceiveMessageFormat { reply = "こんにちは吾輩は猫である．名前はまだない．", action = "", emotion = "happy" });
-        // GlobalVariables.CommentQueue.Add(new ReceiveMessageFormat { reply = "こんにちは吾輩は猫である．名前はまだない．", action = "", emotion = "happy" });
-        // GlobalVariables.CommentQueue.Add(new ReceiveMessageFormat { reply = "こんにちは吾輩は猫である．名前はまだない．", action = "", emotion = "happy" });
-        // GlobalVariables.CommentQueue.Add(new ReceiveMessageFormat { reply = "こんにちは吾輩は猫である．名前はまだない．", action = "", emotion = "happy" });
-        // GlobalVariables.CommentQueue.Add(new ReceiveMessageFormat { reply = "こんにちは吾輩は猫である．名前はまだない．", action = "", emotion = "happy" });
-        // GlobalVariables.CommentQueue.Add(new ReceiveMessageFormat { reply = "こんにちは吾輩は猫である．名前はまだない．", action = "", emotion = "happy" });
-        // GlobalVariables.CommentQueue.Add(new ReceiveMessageFormat { reply = "こんにちは吾輩は猫である．名前はまだない．", action = "", emotion = "happy" });
-        // GlobalVariables.CommentQueue.Add(new ReceiveMessageFormat { reply = "こんにちは吾輩は猫である．名前はまだない．", action = "", emotion = "happy" });
-        // GlobalVariables.CommentQueue.Add(new ReceiveMessageFormat { reply = "こんにちは吾輩は猫である．名前はまだない．", action = "", emotion = "happy" });
         StartCoroutine(DisplayCommentCoroutine());
     }
 

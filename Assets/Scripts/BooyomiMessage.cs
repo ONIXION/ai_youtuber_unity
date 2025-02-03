@@ -26,8 +26,6 @@ public class BooyomiMessage : MonoBehaviour
 
     private void Start()
     {
-        // デバッグ用にqueueにメッセージを追加
-        // GlobalVariables.MessageQueue.Add(new ReceiveMessageFormat { reply = "こんにちは", action = "", emotion = "" });
         GlobalVariables.BooyomiState = 0;
         _cancellationTokenSource = new CancellationTokenSource();
 
