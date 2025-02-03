@@ -54,34 +54,15 @@ public class WebSocketClient : MonoBehaviour
         GlobalVariables.Agent1Queue.Add(new ReceiveMessageFormat
         {
             name = "agent1",
-            content = "皆さん、今日も元気ですか？明らかに待機モーションに戻ったあとで，もう一度モーションを繰り返している．",
-            action = "Think",
-            emotion = "angry",
-            scene = ""
-        });
-        GlobalVariables.Agent2Queue.Add(new ReceiveMessageFormat
-        {
-            name = "agent2",
-            content = "皆さん、今日も元気ですか？",
-            action = "Think",
-            emotion = "excited",
-            scene = ""
-        });
-        GlobalVariables.Agent1Queue.Add(new ReceiveMessageFormat
-        {
-            name = "agent1",
-            content = "私は元気です！",
+            content = "皆さん、今日も元気ですか？ 私は元気です！",
             action = "Nothing",
-            emotion = "angry",
+            emotion = "happy",
             scene = ""
         });
-
-        // // Agent2用のデバッグメッセージ
-
         GlobalVariables.Agent2Queue.Add(new ReceiveMessageFormat
         {
             name = "agent2",
-            content = "私は元気です！",
+            content = "あたしもめっちゃ元気！",
             action = "Nothing",
             emotion = "excited",
             scene = ""
