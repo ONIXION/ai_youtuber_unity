@@ -13,14 +13,81 @@ public class SendTextFormat
 
 public class WebSocketClient : MonoBehaviour
 {
+    [SerializeField] private bool DEBUG = true;  // デバッグモードのフラグ
     private ClientWebSocket webSocket;
     private bool isConnecting = false;
     private bool isConnected = false;
     private bool isQuitting = false;
     private bool Queue_is_empty = false;
 
+    private void AddDebugMessages()
+    {
+        // コメント用のデバッグメッセージ
+        GlobalVariables.CommentQueue.Add(new ReceiveMessageFormat
+        {
+            name = "comment",
+            content = "こんにちは！配信楽しみです！",
+            action = "Nothing",
+            emotion = "aaa",
+            scene = ""
+        });
+        GlobalVariables.CommentQueue.Add(new ReceiveMessageFormat
+        {
+            name = "comment",
+            content = "かわいい！",
+            action = "Nothing",
+            emotion = "ooo",
+            scene = ""
+        });
+
+        // 読み上げ用のデバッグメッセージ
+        GlobalVariables.MessageQueue.Add(new ReceiveMessageFormat
+        {
+            name = "message",
+            content = "これは読み上げテスト用のメッセージです",
+            action = "Nothing",
+            emotion = "",
+            scene = ""
+        });
+
+        // Agent1用のデバッグメッセージ
+        // GlobalVariables.Agent1Queue.Add(new ReceiveMessageFormat
+        // {
+        //     name = "agent1",
+        //     content = "皆さん、今日も元気ですか？",
+        //     action = "Nothing",
+        //     emotion = "happy",
+        //     scene = ""
+        // });
+        // GlobalVariables.Agent1Queue.Add(new ReceiveMessageFormat
+        // {
+        //     name = "agent1",
+        //     content = "私は元気です！",
+        //     action = "Nothing",
+        //     emotion = "excited",
+        //     scene = ""
+        // });
+
+        // // Agent2用のデバッグメッセージ
+        GlobalVariables.Agent2Queue.Add(new ReceiveMessageFormat
+        {
+            name = "agent2",
+            content = "私も元気です！今日は楽しい配信にしましょう！",
+            action = "Nothing",
+            emotion = "excited",
+            scene = ""
+        });
+    }
+
     async void Start()
     {
+        if (DEBUG)
+        {
+            AddDebugMessages();
+            Debug.Log("Debug mode: Added test messages to queues");
+            return;
+        }
+
         await ConnectToServer();
         if (isConnected)
         {
@@ -136,24 +203,37 @@ public class WebSocketClient : MonoBehaviour
                 try
                 {
                     var messageObj = JsonUtility.FromJson<ReceiveMessageFormat>(jsonMessage);
-                    if (messageObj != null && !string.IsNullOrEmpty(messageObj.content))
+                    if (messageObj != null)
                     {
-                        Debug.Log($"Message received: {messageObj.content}");
-                        if (messageObj.name == "comment") // Youtubeのコメント
-                        {
-                            GlobalVariables.CommentQueue.Add(messageObj);
+                        if (!string.IsNullOrEmpty(messageObj.content)){
+                            Debug.Log($"Message received: {messageObj.content}");
+                            if (messageObj.name == "comment") // Youtubeのコメント
+                            {
+                                GlobalVariables.CommentQueue.Add(messageObj);
+                            }
+                            else if (messageObj.name == "message") // Booyomiで読み上げるメッセージ
+                            {
+                                GlobalVariables.MessageQueue.Add(messageObj);
+                            }
+                            else if (messageObj.name == "agent1") // agent1の発言
+                            {
+                                GlobalVariables.Agent1Queue.Add(messageObj);
+                            }
+                            else if (messageObj.name == "agent2") // agent2の発言
+                            {
+                                GlobalVariables.Agent2Queue.Add(messageObj);
+                            }
                         }
-                        else if (messageObj.name == "message") // Booyomiで読み上げるメッセージ
+                        if (!string.IsNullOrEmpty(messageObj.scene))
                         {
-                            GlobalVariables.MessageQueue.Add(messageObj);
-                        }
-                        else if (messageObj.name == "agent1") // agent1の発言
-                        {
-                            GlobalVariables.Agent1Queue.Add(messageObj);
-                        }
-                        else if (messageObj.name == "agent2") // agent2の発言
-                        {
-                            GlobalVariables.Agent2Queue.Add(messageObj);
+                            if (messageObj.scene == "debate")
+                            {
+                                GlobalVariables.sceneIdx = 1;
+                            }
+                            else if (messageObj.scene == "conversation")
+                            {
+                                GlobalVariables.sceneIdx = 0;
+                            }
                         }
                     }
                 }

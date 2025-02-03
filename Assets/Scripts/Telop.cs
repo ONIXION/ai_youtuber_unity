@@ -32,7 +32,7 @@ public class Telop : MonoBehaviour
         cancellationTokenSource = new CancellationTokenSource();
         var token = cancellationTokenSource.Token;
 
-        tmpText.color = color;
+        tmpText.fontSharedMaterial.SetColor("_OutlineColor", color);
         tmpText.text = "";
 
         // Display text character by character

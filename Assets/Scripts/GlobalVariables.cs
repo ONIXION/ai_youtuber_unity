@@ -26,6 +26,11 @@ public class ReceiveMessageFormat
 
 public static class GlobalVariables
 {
+    /// <summary>
+    /// 現在のシーンのインデックス
+    /// 0: conversation, 1: debate
+    /// </summary>
+    public static int sceneIdx = 0;
     // ReceiveMessageFormatの配列を保持する変数
     /// <summary>
     /// agent1のメッセージキュー
