@@ -69,6 +69,7 @@ public abstract class AivisSpeechCharacter : MonoBehaviour
             Text2VoiceAsync(
                 message.content,
                 message.emotion,
+                message.action,
                 speedScale,
                 intonationScale,
                 tempoDynamicsScale,
@@ -85,6 +86,7 @@ public abstract class AivisSpeechCharacter : MonoBehaviour
     protected virtual async UniTask Text2VoiceAsync(
         string text,
         string emotion,
+        string action,
         float speedScale = 1.0f,
         float intonationScale = 1.0f,
         float tempoDynamicsScale = 1.0f,
@@ -93,7 +95,10 @@ public abstract class AivisSpeechCharacter : MonoBehaviour
     {
         try
         {
-            ApplyEmotion(emotion);
+            // actionがThinkかWebSearchの場合は表情を変えない
+            if (action != "Think" && action != "WebSearch"){
+                ApplyEmotion(emotion);
+            }
 
             var audioData = await AivisSpeechClient.Instance.Text2VoiceAsync(
                 text,

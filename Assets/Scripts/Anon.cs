@@ -34,13 +34,10 @@ public class Anon : AivisSpeechCharacter
             case "normal":
                 Debug.Log("AnonEmotionIdx: normal");
                 animator.SetInteger("AnonEmotionIdx", (int)Emotion.normal);
-                faceMR.SetBlendShapeWeight((int)AnonMorph.mouth_ω, 100f);
                 break;
             case "happy":
                 Debug.Log("AnonEmotionIdx: happy");
                 animator.SetInteger("AnonEmotionIdx", (int)Emotion.happy);
-                faceMR.SetBlendShapeWeight((int)AnonMorph.mouth_ω, 0f);
-                faceMR.SetBlendShapeWeight((int)AnonMorph.mouth_smile, 100f);
                 faceMR.SetBlendShapeWeight((int)AnonMorph.eye_smile, 100f);
                 faceMR.SetBlendShapeWeight((int)AnonMorph.mayu_joy, 100f);
                 faceMR.SetBlendShapeWeight((int)AnonMorph.manpu_waiwai, 100f);
@@ -48,8 +45,6 @@ public class Anon : AivisSpeechCharacter
             case "angry":
                 Debug.Log("AnonEmotionIdx: angry");
                 animator.SetInteger("AnonEmotionIdx", (int)Emotion.angry);
-                faceMR.SetBlendShapeWeight((int)AnonMorph.mouth_ω, 0f);
-                faceMR.SetBlendShapeWeight((int)AnonMorph.mouth_puku, 100f);
                 faceMR.SetBlendShapeWeight((int)AnonMorph.eye_angly, 100f);
                 faceMR.SetBlendShapeWeight((int)AnonMorph.highlight_hide, 100f);
                 faceMR.SetBlendShapeWeight((int)AnonMorph.mayu_anger, 100f);
@@ -59,8 +54,6 @@ public class Anon : AivisSpeechCharacter
             case "sad":
                 Debug.Log("AnonEmotionIdx: sad");
                 animator.SetInteger("AnonEmotionIdx", (int)Emotion.sad);
-                faceMR.SetBlendShapeWeight((int)AnonMorph.mouth_ω, 0f);
-                faceMR.SetBlendShapeWeight((int)AnonMorph.mouth_sad, 100f);
                 faceMR.SetBlendShapeWeight((int)AnonMorph.eye_sad, 100f);
                 faceMR.SetBlendShapeWeight((int)AnonMorph.mayu_trouble, 100f);
                 faceMR.SetBlendShapeWeight((int)AnonMorph.manpu_gaan, 100f);
@@ -68,8 +61,6 @@ public class Anon : AivisSpeechCharacter
             case "surprised":
                 Debug.Log("AnonEmotionIdx: surprised");
                 animator.SetInteger("AnonEmotionIdx", (int)Emotion.surprised);
-                faceMR.SetBlendShapeWeight((int)AnonMorph.mouth_ω, 0f);
-                faceMR.SetBlendShapeWeight((int)AnonMorph.mouth_awawa, 100f);
                 faceMR.SetBlendShapeWeight((int)AnonMorph.eye_open, 100f);
                 faceMR.SetBlendShapeWeight((int)AnonMorph.eye_small, 100f);
                 faceMR.SetBlendShapeWeight((int)AnonMorph.mayu_joy, 100f);
@@ -86,8 +77,6 @@ public class Anon : AivisSpeechCharacter
             case "excited":
                 Debug.Log("AnonEmotionIdx: excited");
                 animator.SetInteger("AnonEmotionIdx", (int)Emotion.excited);
-                faceMR.SetBlendShapeWeight((int)AnonMorph.mouth_ω, 0f);
-                faceMR.SetBlendShapeWeight((int)AnonMorph.mouth_v, 100f);
                 faceMR.SetBlendShapeWeight((int)AnonMorph.eye_open, 100f);
                 faceMR.SetBlendShapeWeight((int)AnonMorph.eye_hoshi, 100f);
                 faceMR.SetBlendShapeWeight((int)AnonMorph.mayu_joy, 100f);
@@ -96,16 +85,12 @@ public class Anon : AivisSpeechCharacter
             case "smug":
                 Debug.Log("AnonEmotionIdx: smug");
                 animator.SetInteger("AnonEmotionIdx", (int)Emotion.smug); // どや顔
-                faceMR.SetBlendShapeWeight((int)AnonMorph.mouth_ω, 0f);
-                faceMR.SetBlendShapeWeight((int)AnonMorph.mouth_v, 100f);
                 faceMR.SetBlendShapeWeight((int)AnonMorph.eye_jito, 100f);
                 faceMR.SetBlendShapeWeight((int)AnonMorph.mayu_anger, 50f);
                 break;
             case "calm":
                 Debug.Log("AnonEmotionIdx: calm");
                 animator.SetInteger("AnonEmotionIdx", (int)Emotion.calm);
-                faceMR.SetBlendShapeWeight((int)AnonMorph.mouth_ω, 0f);
-                faceMR.SetBlendShapeWeight((int)AnonMorph.mouth_smile, 100f);
                 faceMR.SetBlendShapeWeight((int)AnonMorph.eye_nagomi, 100f);
                 faceMR.SetBlendShapeWeight((int)AnonMorph.mayu_tare, 100f);
                 break;
@@ -115,12 +100,6 @@ public class Anon : AivisSpeechCharacter
     protected override void ResetEmotion()
     {
         // 変更したモーフをリセット
-        faceMR.SetBlendShapeWeight((int)AnonMorph.mouth_ω, 100f);
-        faceMR.SetBlendShapeWeight((int)AnonMorph.mouth_v, 0f);
-        faceMR.SetBlendShapeWeight((int)AnonMorph.mouth_smile, 0f);
-        faceMR.SetBlendShapeWeight((int)AnonMorph.mouth_sad, 0f);
-        faceMR.SetBlendShapeWeight((int)AnonMorph.mouth_awawa, 0f);
-        faceMR.SetBlendShapeWeight((int)AnonMorph.mouth_puku, 0f);
         faceMR.SetBlendShapeWeight((int)AnonMorph.eye_smile, 0f);
         faceMR.SetBlendShapeWeight((int)AnonMorph.eye_angly, 0f);
         faceMR.SetBlendShapeWeight((int)AnonMorph.eye_sad, 0f);

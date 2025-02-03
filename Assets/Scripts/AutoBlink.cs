@@ -36,6 +36,11 @@ public class AutoBlink : MonoBehaviour
     {
         if (isAnon)
         {
+            // eye_cloneの値が既に0ではない場合は何もしない．
+            if (faceMR.GetBlendShapeWeight((int)AnonMorph.eye_close) != 0)
+            {
+                yield break;
+            }
             faceMR.SetBlendShapeWeight((int)AnonMorph.eye_close, 80);
             yield return new WaitForSeconds(0.01f);
             faceMR.SetBlendShapeWeight((int)AnonMorph.eye_close, 100);
@@ -46,6 +51,11 @@ public class AutoBlink : MonoBehaviour
         }
         else
         {
+            // mabatakiの値が既に0ではない場合は何もしない．
+            if (faceMR.GetBlendShapeWeight((int)QuQuMorph.mabataki) != 0)
+            {
+                yield break;
+            }
             faceMR.SetBlendShapeWeight((int)QuQuMorph.mabataki, 80);
             yield return new WaitForSeconds(0.01f);
             faceMR.SetBlendShapeWeight((int)QuQuMorph.mabataki, 100);
