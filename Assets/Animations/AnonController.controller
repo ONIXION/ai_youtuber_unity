@@ -919,8 +919,8 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Breathing
-  m_Speed: 0.5
-  m_CycleOffset: 0
+  m_Speed: 0.7
+  m_CycleOffset: 0.41
   m_Transitions:
   - {fileID: -2376888715975325425}
   - {fileID: 4240646038546576852}
@@ -942,7 +942,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -6206981513316247533, guid: c346a9e2503cda64ba4698db6aa5e707, type: 3}
+  m_Motion: {fileID: -203655887218126122, guid: 9da11846b0fda794a9f1dbd4164e6f36, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
