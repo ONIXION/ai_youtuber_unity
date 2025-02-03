@@ -14,61 +14,102 @@ public class Anon : AivisSpeechCharacter
                 break;
             case "happy":
                 animator.SetInteger("EmotionIdx", (int)Emotion.happy);
-                faceMR.SetBlendShapeWeight((int)AnonMorph.warai, 100f);
-                faceMR.SetBlendShapeWeight((int)AnonMorph.nikori, 100f);
+                faceMR.SetBlendShapeWeight((int)AnonMorph.mouth_ω, 0f);
+                faceMR.SetBlendShapeWeight((int)AnonMorph.mouth_smile, 100f);
+                faceMR.SetBlendShapeWeight((int)AnonMorph.eye_smile, 100f);
+                faceMR.SetBlendShapeWeight((int)AnonMorph.mayu_joy, 100f);
+                faceMR.SetBlendShapeWeight((int)AnonMorph.manpu_waiwai, 100f);
                 break;
             case "angry":
                 animator.SetInteger("EmotionIdx", (int)Emotion.angry);
-                faceMR.SetBlendShapeWeight((int)AnonMorph.okori, 100f);
-                faceMR.SetBlendShapeWeight((int)AnonMorph.niramu, 100f);
-                faceMR.SetBlendShapeWeight((int)AnonMorph.high_light_off, 100f);
+                faceMR.SetBlendShapeWeight((int)AnonMorph.mouth_ω, 0f);
+                faceMR.SetBlendShapeWeight((int)AnonMorph.mouth_puku, 100f);
+                faceMR.SetBlendShapeWeight((int)AnonMorph.eye_angly, 100f);
+                faceMR.SetBlendShapeWeight((int)AnonMorph.highlight_hide, 100f);
+                faceMR.SetBlendShapeWeight((int)AnonMorph.mayu_anger, 100f);
+                faceMR.SetBlendShapeWeight((int)AnonMorph.namida, 100f);
+                faceMR.SetBlendShapeWeight((int)AnonMorph.manpu_anger, 100f);
                 break;
             case "sad":
                 animator.SetInteger("EmotionIdx", (int)Emotion.sad);
-                faceMR.SetBlendShapeWeight((int)AnonMorph.komaru, 100f);
-                faceMR.SetBlendShapeWeight((int)AnonMorph.mayu_sita, 60f);
+                faceMR.SetBlendShapeWeight((int)AnonMorph.mouth_ω, 0f);
+                faceMR.SetBlendShapeWeight((int)AnonMorph.mouth_sad, 100f);
+                faceMR.SetBlendShapeWeight((int)AnonMorph.eye_sad, 100f);
+                faceMR.SetBlendShapeWeight((int)AnonMorph.mayu_trouble, 100f);
+                faceMR.SetBlendShapeWeight((int)AnonMorph.manpu_gaan, 100f);
                 break;
             case "surprised":
                 animator.SetInteger("EmotionIdx", (int)Emotion.surprised);
-                faceMR.SetBlendShapeWeight((int)AnonMorph.bikkuri, 50f);
-                faceMR.SetBlendShapeWeight((int)AnonMorph.hitomi_small, 40f);
+                faceMR.SetBlendShapeWeight((int)AnonMorph.mouth_ω, 0f);
+                faceMR.SetBlendShapeWeight((int)AnonMorph.mouth_awawa, 100f);
+                faceMR.SetBlendShapeWeight((int)AnonMorph.eye_open, 100f);
+                faceMR.SetBlendShapeWeight((int)AnonMorph.eye_small, 100f);
+                faceMR.SetBlendShapeWeight((int)AnonMorph.mayu_joy, 100f);
+                faceMR.SetBlendShapeWeight((int)AnonMorph.manpu_bikkuri, 100f);
                 break;
             case "shy":
                 animator.SetInteger("EmotionIdx", (int)Emotion.shy);
-                faceMR.SetBlendShapeWeight((int)AnonMorph.hohozome, 100f);
-                faceMR.SetBlendShapeWeight((int)AnonMorph.komaru, 70f);
+                faceMR.SetBlendShapeWeight((int)AnonMorph.eye_niya, 20f);
+                faceMR.SetBlendShapeWeight((int)AnonMorph.eye_tare, 100f);
+                faceMR.SetBlendShapeWeight((int)AnonMorph.mayu_trouble, 50f);
+                faceMR.SetBlendShapeWeight((int)AnonMorph.cheek_tere, 100f);
                 break;
             case "excited":
                 animator.SetInteger("EmotionIdx", (int)Emotion.excited);
-                faceMR.SetBlendShapeWeight((int)AnonMorph.star, 100f);
+                faceMR.SetBlendShapeWeight((int)AnonMorph.mouth_ω, 0f);
+                faceMR.SetBlendShapeWeight((int)AnonMorph.mouth_v, 100f);
+                faceMR.SetBlendShapeWeight((int)AnonMorph.eye_open, 100f);
+                faceMR.SetBlendShapeWeight((int)AnonMorph.eye_hoshi, 100f);
+                faceMR.SetBlendShapeWeight((int)AnonMorph.mayu_joy, 100f);
+                faceMR.SetBlendShapeWeight((int)AnonMorph.manpu_waiwai, 100f);
                 break;
             case "smug":
-                animator.SetInteger("EmotionIdx", (int)Emotion.smug);
-                faceMR.SetBlendShapeWeight((int)AnonMorph.okori, 50f);
-                faceMR.SetBlendShapeWeight((int)AnonMorph.zitome, 80f);
+                animator.SetInteger("EmotionIdx", (int)Emotion.smug); // どや顔
+                faceMR.SetBlendShapeWeight((int)AnonMorph.mouth_ω, 0f);
+                faceMR.SetBlendShapeWeight((int)AnonMorph.mouth_v, 100f);
+                faceMR.SetBlendShapeWeight((int)AnonMorph.eye_jito, 100f);
+                faceMR.SetBlendShapeWeight((int)AnonMorph.mayu_anger, 50f);
                 break;
             case "calm":
                 animator.SetInteger("EmotionIdx", (int)Emotion.calm);
-                faceMR.SetBlendShapeWeight((int)AnonMorph.nagomi, 15f);
+                faceMR.SetBlendShapeWeight((int)AnonMorph.mouth_ω, 0f);
+                faceMR.SetBlendShapeWeight((int)AnonMorph.mouth_smile, 100f);
+                faceMR.SetBlendShapeWeight((int)AnonMorph.eye_nagomi, 100f);
+                faceMR.SetBlendShapeWeight((int)AnonMorph.mayu_tare, 100f);
                 break;
         }
     }
 
     protected override void ResetEmotion()
     {
-        faceMR.SetBlendShapeWeight((int)AnonMorph.warai, 0f);
-        faceMR.SetBlendShapeWeight((int)AnonMorph.nikori, 0f);
-        faceMR.SetBlendShapeWeight((int)AnonMorph.okori, 0f);
-        faceMR.SetBlendShapeWeight((int)AnonMorph.niramu, 0f);
-        faceMR.SetBlendShapeWeight((int)AnonMorph.high_light_off, 0f);
-        faceMR.SetBlendShapeWeight((int)AnonMorph.komaru, 0f);
-        faceMR.SetBlendShapeWeight((int)AnonMorph.mayu_sita, 0f);
-        faceMR.SetBlendShapeWeight((int)AnonMorph.bikkuri, 0f);
-        faceMR.SetBlendShapeWeight((int)AnonMorph.hitomi_small, 0f);
-        faceMR.SetBlendShapeWeight((int)AnonMorph.hohozome, 0f);
-        faceMR.SetBlendShapeWeight((int)AnonMorph.star, 0f);
-        faceMR.SetBlendShapeWeight((int)AnonMorph.zitome, 0f);
-        faceMR.SetBlendShapeWeight((int)AnonMorph.nagomi, 0f);
+        // 変更したモーフをリセット
+        faceMR.SetBlendShapeWeight((int)AnonMorph.mouth_ω, 100f);
+        faceMR.SetBlendShapeWeight((int)AnonMorph.mouth_v, 0f);
+        faceMR.SetBlendShapeWeight((int)AnonMorph.mouth_smile, 0f);
+        faceMR.SetBlendShapeWeight((int)AnonMorph.mouth_sad, 0f);
+        faceMR.SetBlendShapeWeight((int)AnonMorph.mouth_awawa, 0f);
+        faceMR.SetBlendShapeWeight((int)AnonMorph.mouth_puku, 0f);
+        faceMR.SetBlendShapeWeight((int)AnonMorph.eye_smile, 0f);
+        faceMR.SetBlendShapeWeight((int)AnonMorph.eye_angly, 0f);
+        faceMR.SetBlendShapeWeight((int)AnonMorph.eye_sad, 0f);
+        faceMR.SetBlendShapeWeight((int)AnonMorph.eye_open, 0f);
+        faceMR.SetBlendShapeWeight((int)AnonMorph.eye_nagomi, 0f);
+        faceMR.SetBlendShapeWeight((int)AnonMorph.eye_niya, 0f);
+        faceMR.SetBlendShapeWeight((int)AnonMorph.eye_hoshi, 0f);
+        faceMR.SetBlendShapeWeight((int)AnonMorph.eye_tare, 0f);
+        faceMR.SetBlendShapeWeight((int)AnonMorph.mayu_joy, 0f);
+        faceMR.SetBlendShapeWeight((int)AnonMorph.mayu_anger, 0f);
+        faceMR.SetBlendShapeWeight((int)AnonMorph.mayu_trouble, 0f);
+        faceMR.SetBlendShapeWeight((int)AnonMorph.cheek_tere, 0f);
+        faceMR.SetBlendShapeWeight((int)AnonMorph.manpu_bikkuri, 0f);
+        faceMR.SetBlendShapeWeight((int)AnonMorph.manpu_gaan, 0f);
+        faceMR.SetBlendShapeWeight((int)AnonMorph.manpu_waiwai, 0f);
+        faceMR.SetBlendShapeWeight((int)AnonMorph.manpu_anger, 0f);
+        faceMR.SetBlendShapeWeight((int)AnonMorph.highlight_hide, 0f);
+        faceMR.SetBlendShapeWeight((int)AnonMorph.namida, 0f);
+        faceMR.SetBlendShapeWeight((int)AnonMorph.eye_small, 0f);
+        faceMR.SetBlendShapeWeight((int)AnonMorph.eye_jito, 0f);
+        faceMR.SetBlendShapeWeight((int)AnonMorph.mayu_tare, 0f);
     }
 
     protected override Color GetTelopColor()

@@ -36,13 +36,13 @@ public class AutoBlink : MonoBehaviour
     {
         if (isAnon)
         {
-            faceMR.SetBlendShapeWeight((int)AnonMorph.mabataki, 80);
+            faceMR.SetBlendShapeWeight((int)AnonMorph.eye_close, 80);
             yield return new WaitForSeconds(0.01f);
-            faceMR.SetBlendShapeWeight((int)AnonMorph.mabataki, 100);
+            faceMR.SetBlendShapeWeight((int)AnonMorph.eye_close, 100);
             yield return new WaitForSeconds(0.04f);
-            faceMR.SetBlendShapeWeight((int)AnonMorph.mabataki, 60);
+            faceMR.SetBlendShapeWeight((int)AnonMorph.eye_close, 60);
             yield return new WaitForSeconds(0.015f);
-            faceMR.SetBlendShapeWeight((int)AnonMorph.mabataki, 0);
+            faceMR.SetBlendShapeWeight((int)AnonMorph.eye_close, 0);
         }
         else
         {
