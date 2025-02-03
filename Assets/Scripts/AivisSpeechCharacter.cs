@@ -78,23 +78,7 @@ public abstract class AivisSpeechCharacter : MonoBehaviour
         }
     }
 
-    protected virtual void HandleAction(string action)
-    {
-        switch (action)
-        {
-            case "Think":
-                animator.SetBool("isThinking", true);
-                break;
-            case "WebSearch":
-                animator.SetBool("isSearching", true);
-                break;
-            case "Nothing":
-                animator.SetBool("isThinking", false);
-                animator.SetBool("isSearching", false);
-                break;
-        }
-    }
-
+    protected abstract void HandleAction(string action);
     protected abstract void ApplyEmotion(string emotion);
     protected abstract void ResetEmotion();
 
@@ -121,11 +105,6 @@ public abstract class AivisSpeechCharacter : MonoBehaviour
                 volumeScale);
 
             if (audioData == null) return;
-
-            if (emotion == "surprised")
-            {
-                animator.SetInteger("EmotionIdx", (int)Emotion.waiting);
-            }
 
             var audioClip = AivisSpeechClient.CreateAudioClipFromWAV(audioData);
             if (audioClip == null) return;
@@ -156,7 +135,6 @@ public abstract class AivisSpeechCharacter : MonoBehaviour
         {
             Debug.Log("Aivis speech finished");
             ResetEmotion();
-            animator.SetTrigger("FinishTalk"); // ここのアニメーション遷移をキャラごとに分ける
             GlobalVariables.AivisState = 0;
         }
     }

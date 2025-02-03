@@ -3,17 +3,40 @@ using System.Collections.Generic;
 
 public class Anon : AivisSpeechCharacter
 {
-    protected override List<ReceiveMessageFormat> AgentQueue => GlobalVariables.Agent1Queue;
+    protected override List<ReceiveMessageFormat> AgentQueue => GlobalVariables.Agent2Queue;
+
+    protected override void HandleAction(string action)
+    {
+        switch (action)
+        {
+            case "Think":
+                faceMR.SetBlendShapeWeight((int)AnonMorph.manpu_hatena, 100f);
+                animator.SetBool("AnonIsThinking", true);
+                animator.SetBool("AnonIsSearching", false);
+                break;
+            case "WebSearch":
+                faceMR.SetBlendShapeWeight((int)AnonMorph.manpu_hatena, 0f);
+                animator.SetBool("AnonIsSearching", true);
+                animator.SetBool("AnonIsThinking", false);
+                break;
+            case "Nothing":
+                faceMR.SetBlendShapeWeight((int)AnonMorph.manpu_hatena, 0f);
+                animator.SetBool("AnonIsThinking", false);
+                animator.SetBool("AnonIsSearching", false);
+                break;
+        }
+    }
 
     protected override void ApplyEmotion(string emotion)
     {
         switch (emotion)
         {
             case "normal":
-                animator.SetInteger("EmotionIdx", (int)Emotion.normal);
+                animator.SetInteger("AnonEmotionIdx", (int)Emotion.normal);
+                faceMR.SetBlendShapeWeight((int)AnonMorph.mouth_ω, 100f);
                 break;
             case "happy":
-                animator.SetInteger("EmotionIdx", (int)Emotion.happy);
+                animator.SetInteger("AnonEmotionIdx", (int)Emotion.happy);
                 faceMR.SetBlendShapeWeight((int)AnonMorph.mouth_ω, 0f);
                 faceMR.SetBlendShapeWeight((int)AnonMorph.mouth_smile, 100f);
                 faceMR.SetBlendShapeWeight((int)AnonMorph.eye_smile, 100f);
@@ -21,7 +44,7 @@ public class Anon : AivisSpeechCharacter
                 faceMR.SetBlendShapeWeight((int)AnonMorph.manpu_waiwai, 100f);
                 break;
             case "angry":
-                animator.SetInteger("EmotionIdx", (int)Emotion.angry);
+                animator.SetInteger("AnonEmotionIdx", (int)Emotion.angry);
                 faceMR.SetBlendShapeWeight((int)AnonMorph.mouth_ω, 0f);
                 faceMR.SetBlendShapeWeight((int)AnonMorph.mouth_puku, 100f);
                 faceMR.SetBlendShapeWeight((int)AnonMorph.eye_angly, 100f);
@@ -31,7 +54,7 @@ public class Anon : AivisSpeechCharacter
                 faceMR.SetBlendShapeWeight((int)AnonMorph.manpu_anger, 100f);
                 break;
             case "sad":
-                animator.SetInteger("EmotionIdx", (int)Emotion.sad);
+                animator.SetInteger("AnonEmotionIdx", (int)Emotion.sad);
                 faceMR.SetBlendShapeWeight((int)AnonMorph.mouth_ω, 0f);
                 faceMR.SetBlendShapeWeight((int)AnonMorph.mouth_sad, 100f);
                 faceMR.SetBlendShapeWeight((int)AnonMorph.eye_sad, 100f);
@@ -39,7 +62,7 @@ public class Anon : AivisSpeechCharacter
                 faceMR.SetBlendShapeWeight((int)AnonMorph.manpu_gaan, 100f);
                 break;
             case "surprised":
-                animator.SetInteger("EmotionIdx", (int)Emotion.surprised);
+                animator.SetInteger("AnonEmotionIdx", (int)Emotion.surprised);
                 faceMR.SetBlendShapeWeight((int)AnonMorph.mouth_ω, 0f);
                 faceMR.SetBlendShapeWeight((int)AnonMorph.mouth_awawa, 100f);
                 faceMR.SetBlendShapeWeight((int)AnonMorph.eye_open, 100f);
@@ -48,14 +71,14 @@ public class Anon : AivisSpeechCharacter
                 faceMR.SetBlendShapeWeight((int)AnonMorph.manpu_bikkuri, 100f);
                 break;
             case "shy":
-                animator.SetInteger("EmotionIdx", (int)Emotion.shy);
+                animator.SetInteger("AnonEmotionIdx", (int)Emotion.shy);
                 faceMR.SetBlendShapeWeight((int)AnonMorph.eye_niya, 20f);
                 faceMR.SetBlendShapeWeight((int)AnonMorph.eye_tare, 100f);
                 faceMR.SetBlendShapeWeight((int)AnonMorph.mayu_trouble, 50f);
                 faceMR.SetBlendShapeWeight((int)AnonMorph.cheek_tere, 100f);
                 break;
             case "excited":
-                animator.SetInteger("EmotionIdx", (int)Emotion.excited);
+                animator.SetInteger("AnonEmotionIdx", (int)Emotion.excited);
                 faceMR.SetBlendShapeWeight((int)AnonMorph.mouth_ω, 0f);
                 faceMR.SetBlendShapeWeight((int)AnonMorph.mouth_v, 100f);
                 faceMR.SetBlendShapeWeight((int)AnonMorph.eye_open, 100f);
@@ -64,14 +87,14 @@ public class Anon : AivisSpeechCharacter
                 faceMR.SetBlendShapeWeight((int)AnonMorph.manpu_waiwai, 100f);
                 break;
             case "smug":
-                animator.SetInteger("EmotionIdx", (int)Emotion.smug); // どや顔
+                animator.SetInteger("AnonEmotionIdx", (int)Emotion.smug); // どや顔
                 faceMR.SetBlendShapeWeight((int)AnonMorph.mouth_ω, 0f);
                 faceMR.SetBlendShapeWeight((int)AnonMorph.mouth_v, 100f);
                 faceMR.SetBlendShapeWeight((int)AnonMorph.eye_jito, 100f);
                 faceMR.SetBlendShapeWeight((int)AnonMorph.mayu_anger, 50f);
                 break;
             case "calm":
-                animator.SetInteger("EmotionIdx", (int)Emotion.calm);
+                animator.SetInteger("AnonEmotionIdx", (int)Emotion.calm);
                 faceMR.SetBlendShapeWeight((int)AnonMorph.mouth_ω, 0f);
                 faceMR.SetBlendShapeWeight((int)AnonMorph.mouth_smile, 100f);
                 faceMR.SetBlendShapeWeight((int)AnonMorph.eye_nagomi, 100f);
@@ -110,6 +133,7 @@ public class Anon : AivisSpeechCharacter
         faceMR.SetBlendShapeWeight((int)AnonMorph.eye_small, 0f);
         faceMR.SetBlendShapeWeight((int)AnonMorph.eye_jito, 0f);
         faceMR.SetBlendShapeWeight((int)AnonMorph.mayu_tare, 0f);
+        animator.SetTrigger("AnonFinishTalk");
     }
 
     protected override Color GetTelopColor()
