@@ -657,7 +657,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayImage: {fileID: 713785033}
-  ServerUrl: http://YOUR_GCE_IP:8080
+  ServerUrl: http://34.42.95.142:8080
 --- !u!114 &713785033
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3682,7 +3682,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9af30f86342d42499d1b114e1ae1756, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DEBUG: 0
+  DEBUG: 1
 --- !u!114 &2116375238
 MonoBehaviour:
   m_ObjectHideFlags: 0
