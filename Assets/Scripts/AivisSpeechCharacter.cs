@@ -3,8 +3,23 @@ using Cysharp.Threading.Tasks;
 using System;
 using System.Collections.Generic;
 
+public enum VoiceModel
+{
+    Normal = 888753760,
+    Default = 888753761,
+    HighTension = 888753762,
+    Calm = 888753763,
+    Happy = 888753764,
+    AngrySad = 888753765
+}
+
 public abstract class AivisSpeechCharacter : MonoBehaviour
 {
+    [Header("音声設定")]
+    [Tooltip("音声合成に使用するモデル")]
+    [SerializeField] protected VoiceModel voiceModel = VoiceModel.Normal;
+
+    [Header("コンポーネント設定")]
     [SerializeField] protected AudioSource audioSource;
     [SerializeField] protected SkinnedMeshRenderer faceMR;
     [SerializeField] protected Animator animator;
@@ -53,6 +68,9 @@ public abstract class AivisSpeechCharacter : MonoBehaviour
                 Debug.LogError("Telop component not found in the scene!");
             }
         }
+
+        // 初期音声モデルを設定
+        AivisSpeechClient.Instance.SetVoiceModel(voiceModel);
     }
 
     protected abstract List<ReceiveMessageFormat> AgentQueue { get; }
@@ -95,6 +113,9 @@ public abstract class AivisSpeechCharacter : MonoBehaviour
     {
         try
         {
+            // 音声合成の前に現在の音声モデルを確実に設定
+            AivisSpeechClient.Instance.SetVoiceModel(voiceModel);
+
             // actionがThinkかWebSearchの場合は表情を変えない
             if (action != "Think" && action != "WebSearch"){
                 ApplyEmotion(emotion);

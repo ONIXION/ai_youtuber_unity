@@ -47,14 +47,9 @@ public class AivisSpeechClient
 {
     private const string HOST = "localhost";
     private const int PORT = 10101;
-    private const int NORMAL_SPEAKER = 888753760;
-    private const int DEFAULT_SPEAKER = 888753761;
-    private const int HIGH_TENSION = 888753762;
-    private const int CALM = 888753763;
-    private const int HAPPY = 888753764;
-    private const int ANGRY_SAD = 888753765;
 
     private static AivisSpeechClient instance;
+    private VoiceModel currentVoiceModel;
     public static AivisSpeechClient Instance
     {
         get
@@ -69,27 +64,19 @@ public class AivisSpeechClient
 
     private AivisSpeechClient() { }
 
-    public int GetSpeakerIdForEmotion(string emotion)
+    public void SetVoiceModel(VoiceModel model)
     {
-        return emotion switch
-        {
-            "normal" => NORMAL_SPEAKER,
-            "happy" or "smug" => HAPPY,
-            "angry" or "sad" => ANGRY_SAD,
-            "excited" or "surprised" => HIGH_TENSION,
-            "calm" => CALM,
-            _ => DEFAULT_SPEAKER
-        };
+        currentVoiceModel = model;
     }
 
-    public async UniTask<byte[]> Text2VoiceAsync(string text, string emotion, 
+    public async UniTask<byte[]> Text2VoiceAsync(string text, string emotion,
         float speedScale = 1.0f,
         float intonationScale = 1.0f,
         float tempoDynamicsScale = 1.0f,
         float pitchScale = 0.0f,
         float volumeScale = 1.0f)
     {
-        int speaker = GetSpeakerIdForEmotion(emotion);
+        int speaker = (int)currentVoiceModel;
 
         try
         {
