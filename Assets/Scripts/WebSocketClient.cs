@@ -50,6 +50,15 @@ public class WebSocketClient : MonoBehaviour
             emotion = "",
             scene = ""
         });
+        GlobalVariables.sceneIdx = 1;
+        GlobalVariables.MessageQueue.Add(new ReceiveMessageFormat
+        {
+            name = "host",
+            content = "三つ目のテストメッセージです",
+            action = "Nothing",
+            emotion = "",
+            scene = ""
+        });
 
         // Agent1用のデバッグメッセージ
         GlobalVariables.Agent1Queue.Add(new ReceiveMessageFormat
@@ -223,6 +232,7 @@ public class WebSocketClient : MonoBehaviour
                         {
                             if (messageObj.scene == "debate")
                             {
+                                Debug.Log("WebSocketClient: scene == debate");
                                 GlobalVariables.sceneIdx = 1;
                             }
                             else if (messageObj.scene == "conversation")

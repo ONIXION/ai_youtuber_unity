@@ -60,7 +60,11 @@ public class BooyomiMessage : MonoBehaviour
                         // Display telop before speech
                         if (telop != null)
                         {
-                            telop.Display(message.content, Color.black).Forget();
+                            if (message.name == "message"){
+                                telop.Display(message.content, Color.black).Forget();
+                            }else if(message.name == "host"){
+                                telop.Display(message.content, Color.red).Forget();
+                            }
                         }
                         try
                         {
