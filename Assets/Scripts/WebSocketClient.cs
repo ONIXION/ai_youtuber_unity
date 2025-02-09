@@ -14,6 +14,7 @@ public class SendTextFormat
 public class WebSocketClient : MonoBehaviour
 {
     [SerializeField] private bool DEBUG = true;  // デバッグモードのフラグ
+    [SerializeField] private string serverUrl = "ws://localhost:5000";  // サーバーのURL
     private ClientWebSocket webSocket;
     private bool isConnecting = false;
     private bool isConnected = false;
@@ -104,7 +105,7 @@ public class WebSocketClient : MonoBehaviour
         if (isConnecting) return;
         isConnecting = true;
         webSocket = new ClientWebSocket();
-        Uri serverUri = new Uri("ws://localhost:5000");
+        Uri serverUri = new Uri(serverUrl);
         try
         {
             await webSocket.ConnectAsync(serverUri, CancellationToken.None);
@@ -212,6 +213,10 @@ public class WebSocketClient : MonoBehaviour
                             else if (messageObj.name == "agent2") // agent2の発言
                             {
                                 GlobalVariables.Agent2Queue.Add(messageObj);
+                            }
+                            else if (messageObj.name == "host") // ディベートホストの発言
+                            {
+                                GlobalVariables.MessageQueue.Add(messageObj);
                             }
                         }
                         if (!string.IsNullOrEmpty(messageObj.scene))
