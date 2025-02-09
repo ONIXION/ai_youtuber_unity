@@ -61,9 +61,9 @@ public class BooyomiMessage : MonoBehaviour
                         if (telop != null)
                         {
                             if (message.name == "message"){
-                                telop.Display(message.content, Color.black).Forget();
+                                telop.Display(message.content, Color.black, 0.13f).Forget();
                             }else if(message.name == "host"){
-                                telop.Display(message.content, Color.red).Forget();
+                                telop.Display(message.content, Color.red, 0.13f).Forget();
                             }
                         }
                         try

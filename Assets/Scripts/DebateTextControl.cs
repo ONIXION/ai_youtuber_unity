@@ -1,16 +1,19 @@
 using UnityEngine;
+using TMPro;
 
 public class DebateTextControl : MonoBehaviour
 {
+    // TMPを取得
+    [SerializeField] private TextMeshProUGUI textMeshPro;
     void Update()
     {
         if (GlobalVariables.sceneIdx == 0)
         {
-            gameObject.SetActive(false);
+            textMeshPro.text = "";
         }
         else if (GlobalVariables.sceneIdx == 1)
         {
-            gameObject.SetActive(true);
+            textMeshPro.text = "Debate Time!";
         }
     }
 }

@@ -228,17 +228,15 @@ public class WebSocketClient : MonoBehaviour
                                 GlobalVariables.MessageQueue.Add(messageObj);
                             }
                         }
-                        if (!string.IsNullOrEmpty(messageObj.scene))
+                        // Scene handling
+                        if (messageObj.scene == "debate")
                         {
-                            if (messageObj.scene == "debate")
-                            {
-                                Debug.Log("WebSocketClient: scene == debate");
-                                GlobalVariables.sceneIdx = 1;
-                            }
-                            else if (messageObj.scene == "conversation")
-                            {
-                                GlobalVariables.sceneIdx = 0;
-                            }
+                            Debug.Log("WebSocketClient: scene == debate");
+                            GlobalVariables.sceneIdx = 1;
+                        }
+                        else if (messageObj.scene == "conversation")
+                        {
+                            GlobalVariables.sceneIdx = 0;
                         }
                     }
                 }
